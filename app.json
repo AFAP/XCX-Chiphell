@@ -1,13 +1,41 @@
 {
   "pages": [
+    
+    "pages/portal/list",
+    "pages/forum/index",
+    "pages/mine/index",
     "pages/index/index",
     "pages/logs/logs"
   ],
+  "tabBar": {
+    "color": "#555",
+    "selectedColor": "#a61f24",
+    "list": [
+      {
+        "pagePath": "pages/portal/list",
+        "iconPath": "/images/tab_home_normal.png",
+        "selectedIconPath": "/images/tab_home_selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/forum/index",
+        "iconPath": "/images/tab_forum_normal.png",
+        "selectedIconPath": "/images/tab_forum_selected.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath": "/images/tab_mine_normal.png",
+        "selectedIconPath": "/images/tab_mine_selected.png",
+        "text": "我的"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#a61f24",
+    "navigationBarTitleText": "CHH",
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
