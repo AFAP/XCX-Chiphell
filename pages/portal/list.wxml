@@ -1,2 +1,14 @@
-<!--pages/portal/list.wxml-->
-<text>pages/portal/list.wxml</text>
+<van-tabs active="{{ tabIndex }}" bind:change="onTanChange"	 sticky>
+  <van-tab title="{{category.name}}" wx:for="{{ categorys }}" wx:for-item="category" wx:key="catid">
+
+    <view class="base-list-item" wx:for="{{ category.list }}" wx:key="title">
+      <image src="{{item.imgurl}}" mode="aspectFill"></image>
+      <view class="base-list-item-container">
+        <view class="base-list-content-title lines-2">{{item.title}}</view>
+        <view class="base-list-content-sub lines-2">{{item.description}}</view>
+        <view class="base-list-content-time">{{item.time}}</view>
+      </view>
+
+    </view>
+  </van-tab>
+</van-tabs>

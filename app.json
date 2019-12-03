@@ -38,5 +38,10 @@
     "navigationBarTextStyle": "white"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-tab": "/libs/vant/tab/index",
+    "van-tabs": "/libs/vant/tabs/index",
+    "van-tag": "/libs/vant/tag/index"
+  }
 }

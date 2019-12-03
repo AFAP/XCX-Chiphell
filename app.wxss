@@ -1,10 +1,71 @@
-/**app.wxss**/
-.container {
-  height: 100%;
+Page {
+  background-color: #eee;
+  box-sizing: border-box;
+  color: #333;
+  font-size: 16px;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+.lines-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lines-2 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.lines-3 {
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.base-list-item {
+  display: flex;
+  padding: 4px;
+  margin-top: 8px;
+  background-color: #fff;
+}
+
+.base-list-item > image {
+  width: 120px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.base-list-item-container {
+  flex-grow: 1;
+  /* background-color: red; */
+  margin-left: 6px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+}
+
+.base-list-content-title {
+  color: #000;
+  font-size: 16px;
+}
+
+.base-list-content-sub {
+  color: #666;
+  font-size: 14px;
+}
+
+.base-list-content-time {
+  color: #666;
+  font-size: 13px;
+}
