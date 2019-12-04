@@ -1,73 +1,65 @@
 const app = getApp()
 const NetUtils = require('../../utils/NetUtils.js');
-const Html2Json = require('../../libs/html2json.js');
-
-const Xpath = require('../../libs/xpath.js')
 const Dom = require('../../libs/xmldom/dom-parser.js').DOMParser
-
+const Xpath = require('../../libs/xpath.js')
 
 Page({
   data: {
-    href: '',
-    catid: 19,
-    aaa: ''
+    articleId: '',
+    currentPage: 1,
+    totalPage: 1,
+    richText: ''
   },
   onLoad: function(options) {
+    let href = options.href;
+    href = href.replace('article-', '');
+    let articleId = href.split('-')[0];
+    this.setData({
+      articleId
+    })
     this.getDetail(1)
     // href=article-22734-1.html
   },
-
-  onPullDownRefresh: function() {
-    this.getList(1)
-  },
-
   getDetail(tarPage) {
-    NetUtils.request(`/article-22771-1.html?&forcemobile=1`, 'get', {})
+    NetUtils.request(`/article-${this.data.articleId}-${tarPage}.html?&forcemobile=1`, 'get', {})
       .then((data) => {
-
-        const rootNode = new Dom().parseFromString(data)
-        let ctNode = Xpath.select1("//*[@id = 'ct']", rootNode)
-        let contentNode = Xpath.select1("//*[@class = 'bm vw']", ctNode)
-        let tableNode = Xpath.select1("//*[@class = 'vwtb']", contentNode)
+        const rootDoc = new Dom().parseFromString(data);
+        let ctNode = Xpath.select1("//*[@id = 'ct']", rootDoc)
+        let ctDoc = new Dom().parseFromString(ctNode.toString());
+        let contentNode = Xpath.select1("//*[@class = 'bm vw']", ctDoc)
+        let contentDoc = new Dom().parseFromString(contentNode.toString());
+        let tableNode = Xpath.select1("//*[@class = 'vwtb']", contentDoc) 
 
         console.log(contentNode)
         console.log(tableNode)
 
+        if (tarPage == 1) {
+          let pageInfoNode = Xpath.select1("//*[@class = 'ptw pbw cl']", contentNode);
+          let pageInfoDoc = new Dom().parseFromString(pageInfoNode.toString())
+          console.log(pageInfoDoc.toString())
+          let totalPageStr = Xpath.select1("string(//*[local-name(.)='span']/@title)", pageInfoDoc);
+          totalPageStr = totalPageStr.replace('共', '').replace('页', '').trim();
 
-        let divHtml = tableNode.toString();
-        divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"')
-
-
-        this.setData({
-          aaa: divHtml
-        })
-
-        // let doc = Html2Json.html2json(data);
-        // let ctNode = app.getNode(doc, {
-        //   id: 'ct'
-        // })
-        // console.log(ctNode)
-        // let dlParentNode = app.getNode(doc, {
-        //   'classStr': 'bm_c xld'
-        // })
-        // 获取首页数据时获取总页数信息
-        // if (tarPage == 1) {
-        //   let pageInfoNode = app.getNode(doc, {
-        //     'classStr': 'pgs cl'
-        //   })
-        //   let labelNode = {};
-        //   for (let i = 0; i < pageInfoNode.child[0].child.length; i++) {
-        //     if (pageInfoNode.child[0].child[i].tag == 'label') {
-        //       labelNode = pageInfoNode.child[0].child[i]
-        //     }
-        //   }
-        //   let totalPageStr = labelNode.child[1].child[0].text;
-        //   totalPageStr = totalPageStr.replace('/', '').replace('页', '').trim();
-        //   this.setData({
-        //     [totalPageProp]: Number(totalPageStr)
-        //   })
-        // }
-
+          let divHtml = tableNode.toString();
+          divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
+          this.setData({
+            currentPage: tarPage,
+            totalPage: Number(totalPageStr),
+            richText: divHtml
+          })
+        } else {
+          let divHtml = tableNode.toString();
+          divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
+          divHtml = this.data.richText + divHtml;
+          // let divHtml = this.data.richText + tableNode.toString().replace(/<img/g, '<img style="width: 100%;"');
+          this.setData({
+            currentPage: tarPage,
+            richText: divHtml
+          })
+        }
+        if (tarPage < this.data.totalPage) {
+          this.getDetail(tarPage + 1)
+        }
       })
   },
   openDetail: function(event) {
