@@ -57,15 +57,15 @@ view {
 
 .base-list-content-title {
   color: #000;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .base-list-content-sub {
   color: #666;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .base-list-content-time {
   color: #666;
-  font-size: 13px;
+  font-size: 12px;
 }

@@ -1,7 +1,8 @@
 <van-tabs active="{{ tabIndex }}" bind:change="onTanChange"	 sticky>
+  <!-- <van-tab title="标签 2" disabled>内容 2</van-tab> -->
   <van-tab title="{{category.name}}" wx:for="{{ categorys }}" wx:for-item="category" wx:key="catid">
 
-    <view class="base-list-item" wx:for="{{ category.list }}" wx:key="title">
+    <view class="base-list-item" wx:for="{{ category.list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
       <image src="{{item.imgurl}}" mode="aspectFill"></image>
       <view class="base-list-item-container">
         <view class="base-list-content-title lines-2">{{item.title}}</view>

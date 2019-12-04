@@ -2,7 +2,6 @@ const app = getApp()
 const NetUtils = require('../../utils/NetUtils.js');
 const Html2Json = require('../../libs/html2json.js');
 
-
 Page({
   data: {
     tabIndex: 0,
@@ -31,6 +30,69 @@ Page({
       {
         name: '散热器',
         catid: 14,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
+        pageIndex: 1,
+        totalPage: 1,
+        list: []
+      },
+      {
+        name: '',
+        catid: 0,
         pageIndex: 1,
         totalPage: 1,
         list: []
@@ -95,13 +157,10 @@ Page({
             [totalPageProp]: Number(totalPageStr)
           })
         }
-        // console.log(dlParentNode)
         if (!dlParentNode.child) {
           console.log('没有更多数据');
           return;
         }
-
-
         let dlNodes = dlParentNode.child.filter(element => {
           return element.node == "element"
         })
@@ -114,19 +173,24 @@ Page({
         dlNodes.forEach(element => {
           let obj = {
             title: element.child[1].child[0].child[0].text,
+            href: element.child[3].child[1].child[0].attr.href,
             description: element.child[3].child[2].text,
             imgurl: element.child[3].child[1].child[0].child[0].attr.src,
             time: element.child[5].child[1].child[0].text
           };
           list.push(obj);
         });
-
-        // console.log(list)
         this.setData({
           [pageIndexProp]: tarPage,
           [listProp]: list
         })
       })
   },
-
+  openDetail: function(event) {
+    // console.log(event)
+    let item = event.currentTarget.dataset.item;
+    wx.navigateTo({
+      url: '/pages/article/detail?href=' + item.href,
+    })
+  }
 })

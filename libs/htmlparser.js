@@ -313,3 +313,8 @@
 	// CommonJS/nodeJS Loader
 
 	module.exports = HTMLParser;
+// module.exports = {
+//   HTMLParser: HTMLParser,
+//   HTMLtoXML: HTMLtoXML,
+//   HTMLtoDOM: HTMLtoDOM
+// };
