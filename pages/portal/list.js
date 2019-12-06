@@ -35,64 +35,64 @@ Page({
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '主板',
+        catid: 15,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '内存',
+        catid: 137,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '外设',
+        catid: 18,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '电源',
+        catid: 35,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '存储',
+        catid: 23,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '显示设备',
+        catid: 21,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '台式机',
+        catid: 88,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '显卡',
+        catid: 10,
         pageIndex: 1,
         totalPage: 1,
         list: []
       },
       {
-        name: '',
-        catid: 0,
+        name: '相机',
+        catid: 116,
         pageIndex: 1,
         totalPage: 1,
         list: []

@@ -1,4 +1,4 @@
-<van-tabs active="{{ tabIndex }}" bind:change="onTanChange"	 sticky>
+<van-tabs active="{{ tabIndex }}" bind:change="onTanChange"	ellipsis="{{false}}" sticky>
   <!-- <van-tab title="标签 2" disabled>内容 2</van-tab> -->
   <van-tab title="{{category.name}}" wx:for="{{ categorys }}" wx:for-item="category" wx:key="catid">
 

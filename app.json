@@ -14,7 +14,7 @@
     "selectedColor": "#a61f24",
     "list": [
       {
-        "pagePath": "pages/portal/list",
+        "pagePath": "pages/index/index",
         "iconPath": "/images/tab_home_normal.png",
         "selectedIconPath": "/images/tab_home_selected.png",
         "text": "首页"

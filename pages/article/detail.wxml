@@ -1,1 +1,11 @@
-<rich-text nodes="{{richText}}" space="nbsp" />
+<scroll-view scroll-y="true" style="height: {{scrollViewHeight}}px">
+
+  <rich-text nodes="{{richText}}" space="nbsp" />
+</scroll-view>
+
+
+
+<view class="fixed-btn">
+  <image src="/images/ic_comment.png" mode="aspectFill"></image>
+  <view>11</view>
+</view>

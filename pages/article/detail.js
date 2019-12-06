@@ -5,6 +5,7 @@ const Xpath = require('../../libs/xpath.js')
 
 Page({
   data: {
+    scrollViewHeight: wx.getSystemInfoSync().windowHeight,
     articleId: '',
     currentPage: 1,
     totalPage: 1,
@@ -28,7 +29,7 @@ Page({
         let ctDoc = new Dom().parseFromString(ctNode.toString());
         let contentNode = Xpath.select1("//*[@class = 'bm vw']", ctDoc)
         let contentDoc = new Dom().parseFromString(contentNode.toString());
-        let tableNode = Xpath.select1("//*[@class = 'vwtb']", contentDoc) 
+        let tableNode = Xpath.select1("//*[@class = 'vwtb']", contentDoc)
 
         console.log(contentNode)
         console.log(tableNode)
