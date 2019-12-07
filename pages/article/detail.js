@@ -9,7 +9,8 @@ Page({
     articleId: '',
     currentPage: 1,
     totalPage: 1,
-    richText: ''
+    richText: '',
+    commentNum: 0
   },
   onLoad: function(options) {
     let href = options.href;
@@ -25,17 +26,18 @@ Page({
     NetUtils.request(`/article-${this.data.articleId}-${tarPage}.html?&forcemobile=1`, 'get', {})
       .then((data) => {
         const rootDoc = new Dom().parseFromString(data);
-        let ctNode = Xpath.select1("//*[@id = 'ct']", rootDoc)
+
+        let ctNode = Xpath.select1("//*[@id = 'ct']", rootDoc);
         let ctDoc = new Dom().parseFromString(ctNode.toString());
         let contentNode = Xpath.select1("//*[@class = 'bm vw']", ctDoc)
         let contentDoc = new Dom().parseFromString(contentNode.toString());
         let tableNode = Xpath.select1("//*[@class = 'vwtb']", contentDoc)
 
-        console.log(contentNode)
-        console.log(tableNode)
-
         if (tarPage == 1) {
-          let pageInfoNode = Xpath.select1("//*[@class = 'ptw pbw cl']", contentNode);
+          let commentNumNode = Xpath.select1("//*[@id = '_commentnum']", rootDoc);
+          console.log(commentNumNode)
+
+          let pageInfoNode = Xpath.select1("//*[@class = 'ptw pbw cl']", contentDoc);
           let pageInfoDoc = new Dom().parseFromString(pageInfoNode.toString())
           console.log(pageInfoDoc.toString())
           let totalPageStr = Xpath.select1("string(//*[local-name(.)='span']/@title)", pageInfoDoc);
@@ -43,7 +45,12 @@ Page({
 
           let divHtml = tableNode.toString();
           divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
+          let commentNum = Number(commentNumNode.childNodes[0].nodeValue);
+          if (commentNum > 99) {
+            commentNum = 99;
+          }
           this.setData({
+            commentNum,
             currentPage: tarPage,
             totalPage: Number(totalPageStr),
             richText: divHtml
@@ -63,11 +70,9 @@ Page({
         }
       })
   },
-  openDetail: function(event) {
-    // console.log(event)
-    let item = event.currentTarget.dataset.item;
+  gotoComent: function(event) {
     wx.navigateTo({
-      url: '/pages/article/detail?href=' + item.href,
+      url: '/pages/article/comment?articleId=' + this.data.articleId,
     })
   }
 })

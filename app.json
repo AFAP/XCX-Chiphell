@@ -46,5 +46,5 @@
     "van-tabs": "/libs/vant/tabs/index",
     "van-tag": "/libs/vant/tag/index"
   },
-  "debug": true
+  "debug": false
 }

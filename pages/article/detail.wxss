@@ -12,8 +12,8 @@ rich-text {
 
 .fixed-btn {
   position: absolute;
-  bottom: 30px;
-  right: 30px;
+  bottom: 20px;
+  right: 20px;
   z-index: 999;
   background-color: #f57c00;
   color: #f00;
@@ -26,8 +26,8 @@ rich-text {
 }
 
 .fixed-btn > image {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .fixed-btn > view {
