@@ -1,7 +1,3 @@
-Page {
-  background-color: #fff;
-}
-
 rich-text {
   padding: 2px 3px;
 }

@@ -5,56 +5,79 @@ const Xpath = require('../../libs/xpath.js')
 
 Page({
   data: {
-    scrollViewHeight: wx.getSystemInfoSync().windowHeight,
     articleId: '',
-    currentPage: 1,
-    totalPage: 1,
-    richText: ''
+    loading: false,
+    pageIndex: 1,
+    totalPage: 0,
+    list: []
   },
-  onLoad: function (options) { 
-     this.setData({
-       articleId: options.articleId
+  onLoad: function(options) {
+    this.setData({
+      articleId: options.articleId
     })
-    this.getList(1) 
+    this.getList(1)
+  },
+  onPullDownRefresh: function() {
+    this.getList(1)
+  },
+  onReachBottom: function(event) {
+    let pageIndex = this.data.pageIndex;
+    let totalPage = this.data.totalPage;
+    if (pageIndex < totalPage) {
+      this.getList(pageIndex + 1)
+    } else {
+      console.log('没有更多数据了');
+    }
   },
   getList(tarPage) {
+    this.setData({
+      loading: true
+    })
     NetUtils.request(`/portal.php?mod=comment&id=${this.data.articleId}&idtype=aid&page=${tarPage}&forcemobile=1`, 'get', {})
       .then((data) => {
+        wx.stopPullDownRefresh();
+        this.setData({
+          loading: false
+        })
         const rootDoc = new Dom().parseFromString(data);
         let ctNode = Xpath.select1("//*[@id = 'ct']", rootDoc)
         let ctDoc = new Dom().parseFromString(ctNode.toString());
         let dlNodes = Xpath.select("//*[@class = 'ptm pbm bbda cl']", ctDoc)
-        // let contentDoc = new Dom().parseFromString(contentNode.toString());
-        // let tableNode = Xpath.select1("//*[@class = 'vwtb']", contentDoc)
 
         console.log(dlNodes)
-        // console.log(tableNode)
 
-        // if (tarPage == 1) {
-        //   let pageInfoNode = Xpath.select1("//*[@class = 'ptw pbw cl']", contentNode);
-        //   let pageInfoDoc = new Dom().parseFromString(pageInfoNode.toString())
-        //   console.log(pageInfoDoc.toString())
-        //   let totalPageStr = Xpath.select1("string(//*[local-name(.)='span']/@title)", pageInfoDoc);
-        //   totalPageStr = totalPageStr.replace('共', '').replace('页', '').trim();
-
-        //   let divHtml = tableNode.toString();
-        //   divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
-        //   this.setData({
-        //     currentPage: tarPage,
-        //     totalPage: Number(totalPageStr),
-        //     richText: divHtml
-        //   })
-        // } else {
-        //   let divHtml = tableNode.toString();
-        //   divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
-        //   divHtml = this.data.richText + divHtml;
-        //   // let divHtml = this.data.richText + tableNode.toString().replace(/<img/g, '<img style="width: 100%;"');
-        //   this.setData({
-        //     currentPage: tarPage,
-        //     richText: divHtml
-        //   })
-        // }
-        
+        let list = [];
+        if (tarPage == 1) {
+          let pageInfoNode = Xpath.select1("//*[@class = 'pg']", rootDoc);
+          let pageInfoDoc = new Dom().parseFromString(pageInfoNode.toString())
+          let totalPageStr = Xpath.select1("string(//*[local-name(.)='span']/@title)", pageInfoDoc);
+          totalPageStr = totalPageStr.replace('共', '').replace('页', '').trim();
+          this.setData({
+            totalPage: Number(totalPageStr)
+          })
+        } else {
+          list = this.data.list;
+        }
+        dlNodes.forEach(element => {
+          let nickname = element.childNodes[1].childNodes[3].childNodes[0].nodeValue;
+          let time = element.childNodes[1].childNodes[5].childNodes[0].nodeValue;
+          let content = element.childNodes[3].toString();
+          list.push({
+            nickname: nickname,
+            time: time,
+            content: content
+          })
+        })
+        this.setData({
+          pageIndex: tarPage,
+          list
+        })
       })
-  } 
+      .catch(res => {
+        wx.stopPullDownRefresh();
+        this.setData({
+          loading: false
+        })
+      })
+  }
 })

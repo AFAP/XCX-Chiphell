@@ -7,7 +7,6 @@ Page({
   data: {
     scrollViewHeight: wx.getSystemInfoSync().windowHeight,
     articleId: '',
-    currentPage: 1,
     totalPage: 1,
     richText: '',
     commentNum: 0
@@ -20,7 +19,6 @@ Page({
       articleId
     })
     this.getDetail(1)
-    // href=article-22734-1.html
   },
   getDetail(tarPage) {
     NetUtils.request(`/article-${this.data.articleId}-${tarPage}.html?&forcemobile=1`, 'get', {})
@@ -51,7 +49,6 @@ Page({
           }
           this.setData({
             commentNum,
-            currentPage: tarPage,
             totalPage: Number(totalPageStr),
             richText: divHtml
           })
@@ -61,7 +58,6 @@ Page({
           divHtml = this.data.richText + divHtml;
           // let divHtml = this.data.richText + tableNode.toString().replace(/<img/g, '<img style="width: 100%;"');
           this.setData({
-            currentPage: tarPage,
             richText: divHtml
           })
         }

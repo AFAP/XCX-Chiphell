@@ -1,2 +1,14 @@
-<!--pages/article/comment.wxml-->
-<text>pages/article/comment.wxml</text>
+<view class="base-comment-item" wx:for="{{ list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
+  <view class="base-comment-item-top">
+    <view class="base-comment-nickname">{{item.nickname}}</view>
+    <view class="base-comment-time">{{item.time}}</view>
+  </view>
+  <rich-text class="base-comment-content" nodes="{{item.content}}" />
+</view>
+
+<view wx:if="{{loading}}" class="base-container-loading">
+  <van-loading type="spinner" />
+</view>
+
+
+<van-divider wx:if="{{pageIndex == totalPage}}" contentPosition="center" dashed>没有更多数据了</van-divider>
