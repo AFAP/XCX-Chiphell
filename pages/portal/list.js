@@ -4,6 +4,23 @@ const Html2Json = require('../../libs/html2json.js');
 
 Page({
   data: {
+    modules: [
+      { text: '评测', value: '评测' },
+      { text: '电脑', value: '电脑' },
+      { text: '掌设', value: '掌设' },
+      { text: '摄影', value: '摄影' },
+      { text: '照片', value: '照片' },
+      { text: '汽车', value: '汽车' },
+      { text: '单车', value: '单车' },
+      { text: '模型', value: '模型' },
+      { text: '败家', value: '败家' },
+      { text: '时尚', value: '时尚' },
+      { text: '腕表', value: '腕表' },
+      { text: '视听', value: '视听' },
+      { text: '美食', value: '美食' },
+      { text: '家居', value: '家居' },
+      { text: '活宠', value: '活宠' }
+    ],
     tabIndex: 0,
     catid: 19,
     categorys: [{
@@ -102,7 +119,10 @@ Page({
   onLoad: function() {
     this.getList(1)
   },
-  onTanChange: function(event) {
+  onModuleChange: function (event){
+    console.log(event)
+  },
+  onTabChange: function(event) {
     console.log(event)
     this.setData({
       tabIndex: event.detail.name

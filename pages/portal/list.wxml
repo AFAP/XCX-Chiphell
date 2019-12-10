@@ -1,4 +1,7 @@
-<van-tabs active="{{ tabIndex }}" bind:change="onTanChange"	ellipsis="{{false}}" sticky>
+<van-dropdown-menu>
+  <van-dropdown-item value="{{ '评测' }}" options="{{ modules }}"  bind:change="onModuleChange" /> 
+</van-dropdown-menu>
+<van-tabs active="{{ tabIndex }}" bind:change="onTabChange"	ellipsis="{{false}}" sticky>
   <!-- <van-tab title="标签 2" disabled>内容 2</van-tab> -->
   <van-tab title="{{category.name}}" wx:for="{{ categorys }}" wx:for-item="category" wx:key="catid">
 

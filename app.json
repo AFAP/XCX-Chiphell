@@ -46,7 +46,9 @@
     "van-tabs": "/libs/vant/tabs/index",
     "van-tag": "/libs/vant/tag/index",
     "van-divider": "/libs/vant/divider/index",
-    "van-loading": "/libs/vant/loading/index"
+    "van-loading": "/libs/vant/loading/index",
+    "van-dropdown-menu": "/libs/vant/dropdown-menu/index",
+    "van-dropdown-item": "/libs/vant/dropdown-item/index"
   },
   "debug": false
 }
