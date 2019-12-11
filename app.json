@@ -48,7 +48,8 @@
     "van-divider": "/libs/vant/divider/index",
     "van-loading": "/libs/vant/loading/index",
     "van-dropdown-menu": "/libs/vant/dropdown-menu/index",
-    "van-dropdown-item": "/libs/vant/dropdown-item/index"
+    "van-dropdown-item": "/libs/vant/dropdown-item/index",
+    "van-action-sheet": "/libs/vant/action-sheet/index"
   },
   "debug": false
 }

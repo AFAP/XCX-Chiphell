@@ -1,8 +1,23 @@
-<van-dropdown-menu>
-  <van-dropdown-item value="{{ '评测' }}" options="{{ modules }}" bind:change="onModuleChange" />
-</van-dropdown-menu>
-<van-tabs active="{{ tabIndex }}" bind:change="onTabChange" ellipsis="{{false}}" sticky>
-  <!-- <van-tab title="标签 2" disabled>内容 2</van-tab> -->
+<!-- <view class="container-tabs">
+  <view class="tab">1111</view>
+  <view class="tab tab-active">1111</view>
+  <view class="tab">1111</view>
+  <view class="tab">1111</view>
+  <view class="tab">1111</view>
+  <view class="tab">1111</view>
+  <view class="tab">1111</view>
+</view> -->
+<van-action-sheet
+  show="{{ actionSheetShow }}"
+  actions="{{ sheetActions }}"
+  bind:close="onActionSheetClose"
+  bind:cancel="onActionSheetClose"
+  bind:select="onActionSheetSelect"
+   cancel-text="取消"
+/>
+
+<van-tabs active="{{ tabIndex }}" bind:change="onTabChange" ellipsis="{{false}}" bind:disabled="onClickDisabled" sticky>
+  <van-tab title="切换分类" disabled></van-tab>
   <van-tab title="{{category.name}}" wx:for="{{ categorys }}" wx:for-item="category" wx:key="catid">
 
     <!-- <view class="base-list-item" wx:for="{{ category.list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
@@ -17,7 +32,7 @@
   </van-tab>
 </van-tabs>
 
-<view class="base-list-item" wx:for="{{ categorys[tabIndex].list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
+<view class="base-list-item" wx:for="{{ categorys[tabIndex-1].list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
   <image src="{{item.imgurl}}" mode="aspectFill"></image>
   <view class="base-list-item-container">
     <view class="base-list-content-title lines-2">{{item.title}}</view>

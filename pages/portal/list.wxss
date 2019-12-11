@@ -1,3 +1,27 @@
-Page{
-    background-color: #eee;
+Page {
+  background-color: #eee;
+}
+
+.container-tabs {
+  background-color: #aff;
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.container-tabs::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.tab {
+  padding: 18px 12px;
+  margin: 0px 8px;
+}
+
+.tab-active {
+  border-bottom: 3px solid red;
+}
+
+.van-tab--disabled {
+  color: #222 !important;
 }
