@@ -1,11 +1,11 @@
 <van-dropdown-menu>
-  <van-dropdown-item value="{{ '评测' }}" options="{{ modules }}"  bind:change="onModuleChange" /> 
+  <van-dropdown-item value="{{ '评测' }}" options="{{ modules }}" bind:change="onModuleChange" />
 </van-dropdown-menu>
-<van-tabs active="{{ tabIndex }}" bind:change="onTabChange"	ellipsis="{{false}}" sticky>
+<van-tabs active="{{ tabIndex }}" bind:change="onTabChange" ellipsis="{{false}}" sticky>
   <!-- <van-tab title="标签 2" disabled>内容 2</van-tab> -->
   <van-tab title="{{category.name}}" wx:for="{{ categorys }}" wx:for-item="category" wx:key="catid">
 
-    <view class="base-list-item" wx:for="{{ category.list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
+    <!-- <view class="base-list-item" wx:for="{{ category.list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
       <image src="{{item.imgurl}}" mode="aspectFill"></image>
       <view class="base-list-item-container">
         <view class="base-list-content-title lines-2">{{item.title}}</view>
@@ -13,6 +13,15 @@
         <view class="base-list-content-time">{{item.time}}</view>
       </view>
 
-    </view>
+    </view> -->
   </van-tab>
 </van-tabs>
+
+<view class="base-list-item" wx:for="{{ categorys[tabIndex].list }}" wx:key="href" data-item="{{item}}" bindtap="openDetail">
+  <image src="{{item.imgurl}}" mode="aspectFill"></image>
+  <view class="base-list-item-container">
+    <view class="base-list-content-title lines-2">{{item.title}}</view>
+    <view class="base-list-content-sub lines-2">{{item.description}}</view>
+    <view class="base-list-content-time">{{item.time}}</view>
+  </view>
+</view>

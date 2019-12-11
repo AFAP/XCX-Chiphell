@@ -2,27 +2,182 @@ const app = getApp()
 const NetUtils = require('../../utils/NetUtils.js');
 const Html2Json = require('../../libs/html2json.js');
 
+const allModuleInfo = {
+  '评测': [{
+      name: '笔记本',
+      catid: 19,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '机箱',
+      catid: 11,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '处理器',
+      catid: 13,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '散热器',
+      catid: 14,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '主板',
+      catid: 15,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '内存',
+      catid: 137,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '外设',
+      catid: 18,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '电源',
+      catid: 35,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '存储',
+      catid: 23,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '显示设备',
+      catid: 21,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '台式机',
+      catid: 88,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '显卡',
+      catid: 10,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '相机',
+      catid: 116,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    }
+  ],
+  '电脑': [{
+      name: '笔记本',
+      catid: 19,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    },
+    {
+      name: '机箱',
+      catid: 11,
+      pageIndex: 1,
+      totalPage: 1,
+      list: []
+    }
+  ]
+};
+
+
+
 Page({
   data: {
-    modules: [
-      { text: '评测', value: '评测' },
-      { text: '电脑', value: '电脑' },
-      { text: '掌设', value: '掌设' },
-      { text: '摄影', value: '摄影' },
-      { text: '照片', value: '照片' },
-      { text: '汽车', value: '汽车' },
-      { text: '单车', value: '单车' },
-      { text: '模型', value: '模型' },
-      { text: '败家', value: '败家' },
-      { text: '时尚', value: '时尚' },
-      { text: '腕表', value: '腕表' },
-      { text: '视听', value: '视听' },
-      { text: '美食', value: '美食' },
-      { text: '家居', value: '家居' },
-      { text: '活宠', value: '活宠' }
+    modules: [{
+        text: '评测',
+        value: '评测'
+      },
+      {
+        text: '电脑',
+        value: '电脑'
+      },
+      {
+        text: '掌设',
+        value: '掌设'
+      },
+      {
+        text: '摄影',
+        value: '摄影'
+      },
+      {
+        text: '照片',
+        value: '照片'
+      },
+      {
+        text: '汽车',
+        value: '汽车'
+      },
+      {
+        text: '单车',
+        value: '单车'
+      },
+      {
+        text: '模型',
+        value: '模型'
+      },
+      {
+        text: '败家',
+        value: '败家'
+      },
+      {
+        text: '时尚',
+        value: '时尚'
+      },
+      {
+        text: '腕表',
+        value: '腕表'
+      },
+      {
+        text: '视听',
+        value: '视听'
+      },
+      {
+        text: '美食',
+        value: '美食'
+      },
+      {
+        text: '家居',
+        value: '家居'
+      },
+      {
+        text: '活宠',
+        value: '活宠'
+      }
     ],
     tabIndex: 0,
-    catid: 19,
     categorys: [{
         name: '笔记本',
         catid: 19,
@@ -119,8 +274,14 @@ Page({
   onLoad: function() {
     this.getList(1)
   },
-  onModuleChange: function (event){
+  onModuleChange: function(event) {
     console.log(event)
+    let categorys = allModuleInfo[event.detail]
+    this.setData({
+      tabIndex:0,
+      categorys
+    })
+    this.getList(1)
   },
   onTabChange: function(event) {
     console.log(event)
