@@ -585,14 +585,14 @@ Page({
       }
     ],
     tabIndex: 1,
-    categorys:  []
+    categorys: []
   },
   onLoad: function() {
     this.setData({
-      categorys : allModuleInfo['评测']
+      categorys: allModuleInfo['评测']
     })
     this.getList(1)
-  }, 
+  },
   onClickDisabled: function(event) {
     console.log(event)
     this.setData({
@@ -621,7 +621,7 @@ Page({
     this.setData({
       tabIndex: event.detail.name
     });
-    let orgList = this.data.categorys[this.data.tabIndex-1].list;
+    let orgList = this.data.categorys[this.data.tabIndex - 1].list;
     if (orgList.length == 0) {
       this.getList(1)
     }
@@ -659,17 +659,20 @@ Page({
           let pageInfoNode = app.getNode(doc, {
             'classStr': 'pgs cl'
           })
-          let labelNode = {};
-          for (let i = 0; i < pageInfoNode.child[0].child.length; i++) {
-            if (pageInfoNode.child[0].child[i].tag == 'label') {
-              labelNode = pageInfoNode.child[0].child[i]
+          console.log(pageInfoNode)
+          if (pageInfoNode) {
+            let labelNode = {};
+            for (let i = 0; i < pageInfoNode.child[0].child.length; i++) {
+              if (pageInfoNode.child[0].child[i].tag == 'label') {
+                labelNode = pageInfoNode.child[0].child[i]
+              }
             }
+            let totalPageStr = labelNode.child[1].child[0].text;
+            totalPageStr = totalPageStr.replace('/', '').replace('页', '').trim();
+            this.setData({
+              [totalPageProp]: Number(totalPageStr)
+            })
           }
-          let totalPageStr = labelNode.child[1].child[0].text;
-          totalPageStr = totalPageStr.replace('/', '').replace('页', '').trim();
-          this.setData({
-            [totalPageProp]: Number(totalPageStr)
-          })
         }
         if (!dlParentNode.child) {
           console.log('没有更多数据');
@@ -678,21 +681,25 @@ Page({
         let dlNodes = dlParentNode.child.filter(element => {
           return element.node == "element"
         })
-        // console.log(dlNodes);
+        console.log(dlNodes);
         let list = [];
         if (tarPage != 1) {
           list = [...orgList];
         }
 
         dlNodes.forEach(element => {
-          let obj = {
-            title: element.child[1].child[0].child[0].text,
-            href: element.child[3].child[1].child[0].attr.href,
-            description: element.child[3].child[2].text,
-            imgurl: element.child[3].child[1].child[0].child[0].attr.src,
-            time: element.child[5].child[1].child[0].text
-          };
-          list.push(obj);
+          try {
+            let obj = {
+              title: element.child[1].child[0].child[0].text,
+              href: element.child[3].child[1].child[0].attr.href,
+              description: element.child[3].child[2].text,
+              imgurl: element.child[3].child[1].child[0].child[0].attr.src,
+              time: element.child[5].child[1].child[0].text
+            };
+            list.push(obj);
+          } catch (e) {
+            console.log(e)
+          }
         });
         this.setData({
           [pageIndexProp]: tarPage,
