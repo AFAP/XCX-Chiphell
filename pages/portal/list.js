@@ -537,6 +537,7 @@ const allModuleInfo = {
 Page({
   data: {
     actionSheetShow: false,
+    sheetAction:'评测',
     sheetActions: [{
         name: '评测'
       },
@@ -609,6 +610,7 @@ Page({
     let categorys = allModuleInfo[event.detail.name];
     this.setData({
       actionSheetShow: false,
+      sheetAction: event.detail.name,
       tabIndex: 1,
       categorys
     })
@@ -701,8 +703,16 @@ Page({
   openDetail: function(event) {
     // console.log(event)
     let item = event.currentTarget.dataset.item;
-    wx.navigateTo({
-      url: '/pages/article/detail?href=' + item.href,
-    })
+    console.log(item.href)
+    if (this.data.sheetAction == '评测'){
+      wx.navigateTo({
+        url: '/pages/article/detail?href=' + item.href,
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/thread/detail?href=' + item.href,
+      })
+    }
+   
   }
 })

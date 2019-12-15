@@ -4,6 +4,8 @@
     "pages/portal/list",
     "pages/article/detail",
     "pages/article/comment",
+    "pages/thread/detail",
+    
     "pages/forum/index",
     "pages/mine/index",
     "pages/index/index",
