@@ -1,5 +1,6 @@
 <scroll-view scroll-y="true" style="height: {{scrollViewHeight}}px">
   <rich-text nodes="{{ '<div style=\"word-break: break-all;\">' + richText + '</div>'}}" space="nbsp" />
+<!-- <rich-text nodes="{{ nodes }}" space="nbsp" /> -->
 </scroll-view>
 
 <view class="fixed-btn" bindtap="gotoComent">
