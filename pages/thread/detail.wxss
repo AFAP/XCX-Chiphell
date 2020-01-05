@@ -1,1 +1,38 @@
-/* pages/thread/detail.wxss */
+rich-text {
+  padding: 2px 3px;
+}
+
+.container-richtext {
+  height: 100%;
+}
+
+.fixed-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: #f57c00;
+  color: #f00;
+  border-radius: 30px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixed-btn > image {
+  width: 22px;
+  height: 22px;
+}
+
+.fixed-btn > view {
+  position: absolute;
+  border-radius: 30px;
+  background-color: #a61f24;
+  color: #fff;
+  right: 6px;
+  top: 6px;
+  font-size: 11px;
+  padding: 2px;
+}

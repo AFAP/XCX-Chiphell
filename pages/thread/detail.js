@@ -46,6 +46,7 @@ Page({
 
         let divHtml = floor1.toString();
         divHtml = divHtml.replace(/&amp;/g, '&')
+        // 处理文章图片
         divHtml = divHtml.replace(/forum.php\?mod=image&aid=[^"]*"/g, function(value, index) {
           const arr = value.split('&');
           let aid = arr[1].split('=')[1];
@@ -59,7 +60,19 @@ Page({
           // console.log(src);
           return src + '" ';
         })
-        divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
+        // 处理头像
+        divHtml = divHtml.replace(/https:\/\/www.chiphell.com\/uc_server\/avatar.php\?uid=[^"]*"/g, function (value, index) {
+          const arr = value.split('?')[1].split('&');
+          let aid = arr[0].split('=')[1];
+          aid = aid.padStart(9, '0');
+          let pp = aid.substring(0, 3) + '/' + aid.substring(3, 5) + '/' + aid.substring(5, 7) + '/' + aid.substring(7, 9);
+          const src = `https://www.chiphell.com/uc_server/data/avatar/${pp}_avatar_small.jpg`;
+          // console.log(value);
+          // console.log(aid);
+          // console.log(src);
+          return src + '" ';
+        })
+        // divHtml = divHtml.replace(/<img/g, '<img style="width: 100%;"').replace(/&amp;nbsp;/g, '&nbsp;');
         divHtml = this.data.richText + divHtml;
         this.setData({
           richText: divHtml
